@@ -1,3 +1,5 @@
+// Implementation of binary tree type
+// !A binary tree is also a graph!
 #ifndef BINARYTREETYPE_H
 #define BINARYTREETYPE_H
 
@@ -179,20 +181,38 @@ binaryTreeType<elemType>::binaryTreeType()
 // Binary tree traversal
 // The item insertion, deletion and lookup operations require
 // that the binary tree be traversed.
+// *******************Application*********************************
+// Preorder traversal: Make a copy of a binary tree while preserving 
+// the structure of the binary tree
+// Postorder traversal: Delete all of the nodes of a binary tree
+// Inorder traversal: Visits the nodes in sorted order in binary 
+// search trees.
 template <class elemType>
 void binaryTreeType<elemType>::inorderTraversal() const
+// The binary tree is traversed as follows:
+// 1. Traverse the left subtree.
+// 2. Visit the node
+// 3. Traverse the right subtree.
 {
     inorder(root);
 }
 
 template <class elemType>
 void binaryTreeType<elemType>::preorderTraversal() const
+// The binary tree is traversed as follows:
+// 1. Visit the node.
+// 2. Traverse the left subtree.
+// 3. Traverse the right subtree.
 {
     preorder(root);
 }
 
 template <class elemType>
 void binaryTreeType<elemType>::postorderTraversal() const
+// The binary tree is traversed as follows:
+// 1. Traverse the left subtree.
+// 2. Traverse the right subtree.
+// 3. Visit the node
 {
     postorder(root);
 }
@@ -217,6 +237,10 @@ int binaryTreeType<elemType>::treeLeavesCount() const
 
 template <class elemType>
 void binaryTreeType<elemType>::inorder(nodeType<elemType> *p) const
+// The binary tree is traversed as follows:
+// 1. Traverse the left subtree.
+// 2. Visit the node
+// 3. Traverse the right subtree.
 {
     if (p != nullptr)
     {
@@ -228,6 +252,10 @@ void binaryTreeType<elemType>::inorder(nodeType<elemType> *p) const
 
 template <class elemType>
 void binaryTreeType<elemType>::preorder(nodeType<elemType> *p) const
+// The binary tree is traversed as follows:
+// 1. Visit the node.
+// 2. Traverse the left subtree.  
+// 3. Traverse the right subtree.
 {
     if (p != nullptr)
     {   
@@ -239,6 +267,10 @@ void binaryTreeType<elemType>::preorder(nodeType<elemType> *p) const
 
 template <class elemType>
 void binaryTreeType<elemType>::postorder(nodeType<elemType> *p) const
+// The binary tree is traversed as follows:
+// 1. Traverse the left subtree.
+// 2. Traverse the right subtree.
+// 3. Visit the node
 {
     if (p != nullptr)
     {
