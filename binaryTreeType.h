@@ -9,9 +9,9 @@ using namespace std;
 template <class elemType>
 struct nodeType
 {
-    elemType info;
-    nodeType<elemType> *lLink;
-    nodeType<elemType> *rLink;
+    elemType info;                  // Store the data
+    nodeType<elemType> *lLink;      // Pointer to the left child
+    nodeType<elemType> *rLink;      // Pointer to the right child
 };
 
 // Definition of the class
@@ -97,7 +97,7 @@ public:
     // Destructor
 
 protected:
-    nodeType<elemType> *root;
+    nodeType<elemType> *root;           // Pointer to the root node of the binary tree
 
 private:
     void copyTree(nodeType<elemType>* &copiedTreeRoot, nodeType<elemType>* otherTreeRoot);
@@ -169,12 +169,16 @@ bool binaryTreeType<elemType>::isEmpty() const
     return (root == nullptr);
 }
 
+// Constructor
 template <class elemType>
 binaryTreeType<elemType>::binaryTreeType()
 {
     root = nullptr;
 }
 
+// Binary tree traversal
+// The item insertion, deletion and lookup operations require
+// that the binary tree be traversed.
 template <class elemType>
 void binaryTreeType<elemType>::inorderTraversal() const
 {
@@ -246,6 +250,11 @@ void binaryTreeType<elemType>::postorder(nodeType<elemType> *p) const
 
 template <class elemType>
 int binaryTreeType<elemType>::height(nodeType<elemType> *p) const
+// Height(p) denotes the height of the binary tree with root p
+// If the binary tree is empty, then the height is 0
+// If tree is non-binary, first find the height of the left subtree and 
+// the height of the right subtree. Then take the maximum of these two 
+// heights and add 1 to find the height of the binary tree.
 {
     if (p == nullptr)
         return 0;
@@ -255,6 +264,7 @@ int binaryTreeType<elemType>::height(nodeType<elemType> *p) const
 
 template <class elemType>
 int binaryTreeType<elemType>::max(int x, int y) const
+// Determine the larger of two intergers.
 {
     if (x >= y)
         return x;
@@ -264,15 +274,20 @@ int binaryTreeType<elemType>::max(int x, int y) const
 
 template <class elemType>
 void binaryTreeType<elemType>::copyTree(nodeType<elemType>* &copiedTreeRoot, nodeType<elemType>* otherTreeRoot)
+// To make an identical copy of a binary tree
+// If we use just the value of the pointer of the root node to make 
+// a copy of a binary tree, we get a shallow copy of the data.
+// -> We need to create as many nodes as there are in the binary
+// tree to be copied.
 {
     if (otherTreeRoot == nullptr)
         copiedTreeRoot = nullptr;
     else
     {
         copiedTreeRoot = new nodeType<elemType>;
-        copiedTreeRoot->info = otherTreeRoot->info;
-        copyTree(copiedTreeRoot->lLink, otherTreeRoot->lLink);
-        copyTree(copiedTreeRoot->rLink, otherTreeRoot->rLink);
+        copiedTreeRoot->info = otherTreeRoot->info;             // Copy info into the copy tree root
+        copyTree(copiedTreeRoot->lLink, otherTreeRoot->lLink);  // Copy pointer left link
+        copyTree(copiedTreeRoot->rLink, otherTreeRoot->rLink);  // Copy pointer right link
     }
 } //end copyTree
 
