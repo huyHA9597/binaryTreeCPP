@@ -1,6 +1,14 @@
 #ifndef BSEARCHTREETYPE_H
 #define BSEARCHTREETYPE_H
 
+/* Define  a binary search tree, T, is either empty or
+    1. T has a special node called the root node.
+    2. T has two sets of nodes Lt and Rt (left subtree, right subtree).
+    3. The key in the root node is larger than every key in
+    the left subtree and smaller than every key in the right subtree/
+    4. Lt and Rt are binary subtree.
+*/
+
 #include <iostream>
 #include "binaryTreeType.h"
 
@@ -43,16 +51,18 @@ private:
 template <class elemType>
 bool bSearchTreeType<elemType>::search(const elemType& searchItem) const
 {
-    nodeType<elemType> *current;
+    nodeType<elemType> *current;        // Pointer to traverse the binary search tree
     bool found = false;
-    if (this->root == nullptr)
+    if (this->root == nullptr)          // If tree is empty.
         cout << "Cannot search an empty tree." << endl;
     else
     {
-        current = this->root;
-        while (current != nullptr && !found)
+        current = this->root;           // Current is initialize to root
+                                        // since we must begin our search
+                                        // at the root node.
+        while (current != nullptr && !found)        // traverse the binary tree
         {
-            if (current->info == searchItem)
+            if (current->info == searchItem)        // compare search item with info in the node
                 found = true;
             else if (current->info > searchItem)
                 current = current->lLink;
@@ -73,12 +83,13 @@ void bSearchTreeType<elemType>::insert(const elemType& insertItem)
     newNode->info = insertItem;
     newNode->lLink = nullptr;
     newNode->rLink = nullptr;
-    if (this->root == nullptr)
+    if (this->root == nullptr)      // if root is nullptr, the tree is empty
+                                    // make root point to the new node
         this->root = newNode;
     else
     {
         current = this->root;
-        while (current != nullptr)
+        while (current != nullptr)      // search the binary tree
         {
             trailCurrent = current;
             if (current->info == insertItem)
@@ -94,6 +105,7 @@ void bSearchTreeType<elemType>::insert(const elemType& insertItem)
                 current = current->rLink;
         }   // end while
 
+        // Insert the new node in the binary tree
         if (trailCurrent->info > insertItem)
             trailCurrent->lLink = newNode;
         else
